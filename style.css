@@ -1,0 +1,34 @@
+header {
+  background-color: #3c3c3c;
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+}
+
+header h1 {
+  font-size: 30px;
+  color: white;
+}
+
+header input[type="text"] {
+  width: 1000px;
+  height: 30px;
+}
+
+main {
+  width: 90%;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.card_style_1 {
+  margin-top: 10px;
+  border-radius: 30px;
+  background-color: green;
+  margin-left: 20px;
+  border: 5px solid black;
+  overflow: hidden;
+}
