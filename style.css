@@ -19,9 +19,15 @@ header input[type="text"] {
 }
 
 main {
+  position: relative;
+}
+
+.movies {
+  /* position: relative; */
   width: 90%;
   display: flex;
   flex-wrap: wrap;
+  z-index: 1;
 }
 
 .card_style_1 {
@@ -31,4 +37,27 @@ main {
   margin-left: 20px;
   border: 5px solid black;
   overflow: hidden;
+}
+
+.modal {
+  top: 100px;
+  left: 50%;
+  transform: translate(-50%, 0);
+  position: absolute;
+  background-color: white;
+  width: 700px;
+  height: 1000px;
+  margin: 0 auto;
+  z-index: 2;
+  border: 3px solid black;
+  border-radius: 30px;
+  display: none;
+}
+
+.modal div {
+  overflow: scroll;
+}
+
+a {
+  text-decoration: none;
 }
