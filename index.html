@@ -5,15 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>영화 검색 사이트</title>
     <link rel="stylesheet" href="style.css" />
-    <script src="app.js"></script>
   </head>
   <body>
     <header>
       <h1>영화 검색</h1>
-      <input type="text" placeholder="영화를 검색하세요..." /> <br />
+      <input
+        id="movieTitle"
+        type="text"
+        placeholder="영화를 검색하세요..."
+        onkeyup="search()"
+      />
+      <br />
       <button>북마크 보기</button>
     </header>
     <main id="main"></main>
     <footer></footer>
+    <script src="app.js"></script>
   </body>
 </html>
