@@ -1,57 +1,34 @@
-const options = {
-  method: "GET",
-  headers: {
-    accept: "application/json",
-    Authorization:
-      "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxMzkxYWVjMTA3ZTRlNmFmMWUwYWM4NjQyMDUwODdjMCIsIm5iZiI6MTczNjMxMjc3Ny42MjMwMDAxLCJzdWIiOiI2NzdlMDdjOWE2Nzc4YWE1YjM3YWZhMzEiLCJzY29wZXMiOlsiYXBpX3JlYWQiXSwidmVyc2lvbiI6MX0.OEs7hHoPgUBZiTsFv9Z0WhrBamfklY-BTN4veBfHVMg",
-  },
-};
+import { fetchMovies } from "./api.js";
 
-fetch(
-  "https://api.themoviedb.org/3/movie/popular?language=ko-KR&page=1",
-  options
-)
-  .then((res) => {
-    if (!res.ok) {
-      throw new Error("에러 발생!");
-    }
-    return res.json();
-  })
-  .then((data) => {
-    console.log(data);
-    data["results"].forEach((elem) => {
-      // console.log(elem["title"], elem["vote_average"], elem["poster_path"]);
-      // console.log(elem);
-      const main = document.querySelector(".movies");
-      let img =
-        "https://media.themoviedb.org/t/p/w440_and_h660_face" +
-        elem["poster_path"];
-      let title = elem["title"];
-      let rate = elem["vote_average"];
-      let engTitle = elem["original_title"];
-      let id = elem["id"];
-      let tempHtml = `
-      <a href="#popup">
-        <div class="card_style_1" onclick="modal()" id="${id}">
-          <div class="image">
-            <img
-              class="poster w-full"
-              src="${img}"
-              alt="${title}"
-            />
-          </div>
-          <div class="content">
-            <h2>${title} <br> (${engTitle})</h2>
-            <p>평점: ${rate}</p>
-          </div>
+console.log(fetchMovies);
+fetchMovies["results"].forEach((elem) => {
+  // console.log(elem);
+  const main = document.querySelector(".movies");
+  let img =
+    "https://media.themoviedb.org/t/p/w440_and_h660_face" + elem["poster_path"];
+  let title = elem["title"];
+  let rate = elem["vote_average"];
+  let engTitle = elem["original_title"];
+  let id = elem["id"];
+  let tempHtml = `
+      <div class="card_style_1" onclick="modal()" id="${id}">
+        <div class="image">
+          <img
+            class="poster w-full"
+            src="${img}"
+            alt="${title}"
+          />
         </div>
-      </a>`;
-      let movie = document.createElement("div");
-      movie.innerHTML = tempHtml;
-      main.appendChild(movie);
-    });
-  })
-  .catch((err) => console.error(err));
+        <div class="content">
+          <h2>${title} <br> (${engTitle})</h2>
+          <p>평점: ${rate}</p>
+        </div>
+      </div>`;
+  let movie = document.createElement("div");
+  movie.innerHTML = tempHtml;
+  console.log(tempHtml);
+  main.appendChild(movie);
+});
 
 // 검색 기능 함수
 const search = function () {
