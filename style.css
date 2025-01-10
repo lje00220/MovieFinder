@@ -39,6 +39,18 @@ main {
   overflow: hidden;
 }
 
+.card_style_1 img {
+  pointer-events: none;
+}
+
+.card_style_1 h2 {
+  pointer-events: none;
+}
+
+.card_style_1 p {
+  pointer-events: none;
+}
+
 .modal {
   top: 100px;
   left: 50%;
@@ -51,7 +63,7 @@ main {
   z-index: 2;
   border: 3px solid black;
   border-radius: 30px;
-  /* display: none; */
+  display: none;
 }
 
 .modal div {

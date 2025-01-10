@@ -7,6 +7,7 @@ const options = {
   },
 };
 
+// TMDB 인기 영화 API 요청 코드
 async function getMoviesAPI() {
   try {
     const response = await fetch(
@@ -18,7 +19,6 @@ async function getMoviesAPI() {
       throw new Error("에러 발생!!");
     }
     const data = await response.json();
-    console.log(data);
     return data;
   } catch (error) {
     console.error("에러 발생!!!");
