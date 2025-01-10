@@ -15,16 +15,21 @@ const makeCard = function (elem) {
   let overview = elem["overview"];
   let date = elem["release_date"];
   let tempHtml = `
-      <div class="card_style_1" id="${id}">
-        <img
-          class="poster w-full"
-          src="${img}"
-          alt="${title}"
-        />
-        <h2 id="title">${title} <br> (${engTitle})</h2>
-        <p style="display: none;" id="overview">${overview}</p>
-        <p style="display: none;" id="date">${date}</p>
-        <p id="rate">평점: ${rate}</p>
+      <div class="movieCard" id="${id}">
+        <div>
+          <img
+            class="poster"
+            id="image"
+            src="${img}"
+            alt="${title}"
+          />
+        </div>
+        <div class="movieComment">
+          <h2 id="title">${title} <br> (${engTitle})</h2>
+          <p style="display: none;" id="overview">${overview}</p>
+          <p style="display: none;" id="date">${date}</p>
+          <p id="rate">평점: ${rate}</p>
+        </div>
       </div>`;
   let movie = document.createElement("div");
   movie.innerHTML = tempHtml;
@@ -35,7 +40,7 @@ const makeCard = function (elem) {
 const search = function () {
   const movieTitle = document.querySelector("#movieTitle");
   const filter = movieTitle.value.toUpperCase();
-  const div = document.getElementsByClassName("card_style_1");
+  const div = document.getElementsByClassName("movieCard");
 
   for (let i = 0; i < div.length; i++) {
     let content = div[i].getElementsByTagName("h2")[0];
@@ -51,19 +56,24 @@ const search = function () {
 // 모달창 클릭, 닫기
 const modalFunc = function (target) {
   const modalPage = document.querySelector(".modal");
-  // console.log(target.firstElementChild);
-  const img = target.firstElementChild.src;
+  const img = target.querySelector("#image").src;
   const title = target.querySelector("#title").textContent;
   const rate = target.querySelector("#rate").textContent;
   const content = target.querySelector("#overview").textContent;
   const releaseDate = target.querySelector("#date").textContent;
-  let tempModal = `<div>
-    <button class="modalBtn">닫기</button>
-    <img src="${img}" alt="${title}">
-    <h2>${title}</h2>
-    <p>${content}</p>
-    <p>개봉일: ${releaseDate}</p>
-    <p>${rate}</p>
+  let tempModal = `<div id="modalDiv">
+    <div class="btn">
+      <button class="modalBtn">닫기</button>
+    </div>
+    <div class="modalImg">
+      <img src="${img}" alt="${title}">
+    </div>
+    <div class="content">
+      <h2>${title}</h2>
+      <p>${content}</p>
+      <p>개봉일: ${releaseDate}</p>
+      <p>${rate}</p>
+    </div>
   </div>`;
   // console.log(target);
   modalPage.innerHTML = tempModal;
@@ -79,6 +89,7 @@ fetchMovies["results"].forEach((elem) => makeCard(elem));
 searchInput.addEventListener("keyup", search);
 main.onclick = function (event) {
   let target = event.target;
+  console.log(target);
   if (target.tagName != "DIV") return;
   modalFunc(target);
 };

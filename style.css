@@ -1,3 +1,21 @@
+@font-face {
+  font-family: "GmarketSansMedium";
+  src: url("https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff")
+    format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+* {
+  font-family: "GmarketSansMedium", serif;
+  font-weight: normal;
+  font-style: normal;
+}
+
+body {
+  background-color: #dddddd;
+}
+
 header {
   background-color: #3c3c3c;
   height: 200px;
@@ -5,7 +23,6 @@ header {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin: 0;
 }
 
 header h1 {
@@ -23,32 +40,35 @@ main {
 }
 
 .movies {
-  /* position: relative; */
-  width: 90%;
+  position: relative;
+  z-index: 1;
   display: flex;
   flex-wrap: wrap;
-  z-index: 1;
+  justify-content: space-between;
+  padding: 30px;
 }
 
-.card_style_1 {
-  margin-top: 10px;
-  border-radius: 30px;
-  background-color: white;
-  margin-left: 20px;
-  border: 5px solid black;
-  overflow: hidden;
+.movies > div {
+  width: 300px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0px 5px 5px #aaa;
+  margin-bottom: 20px;
+  margin-left: 15px;
 }
 
-.card_style_1 img {
+.movieCard .poster {
+  width: 100%;
+  border-radius: 10px;
+}
+
+.movieCard > div {
   pointer-events: none;
 }
 
-.card_style_1 h2 {
-  pointer-events: none;
-}
-
-.card_style_1 p {
-  pointer-events: none;
+.movieCard .movieComment {
+  margin-left: 7px;
+  font-size: 12px;
 }
 
 .modal {
@@ -56,20 +76,31 @@ main {
   left: 50%;
   transform: translate(-50%, 0);
   position: fixed;
-  background-color: white;
   width: 700px;
-  height: 1000px;
+  height: 800px;
   margin: 0 auto;
   z-index: 2;
-  border: 3px solid black;
-  border-radius: 30px;
   display: none;
-}
-
-.modal div {
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0px 5px 5px #aaa;
   overflow: scroll;
 }
 
-a {
-  text-decoration: none;
+.modal img {
+  display: block;
+  margin: 0 auto;
+  background-color: red;
+  width: 95%;
+  border-radius: 10px;
+}
+
+.modal button {
+  float: right;
+  margin: 10px 10px 10px 0;
+  right: 0px;
+}
+
+.modal .content {
+  margin: 40px 20px;
 }
