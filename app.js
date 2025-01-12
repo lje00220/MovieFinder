@@ -15,7 +15,6 @@ const makeCard = function (elem) {
   let overview = elem["overview"];
   let date = elem["release_date"];
   let tempHtml = `
-      <div class="movieCard" id="${id}">
         <div>
           <img
             class="poster"
@@ -29,9 +28,9 @@ const makeCard = function (elem) {
           <p style="display: none;" id="overview">${overview}</p>
           <p style="display: none;" id="date">${date}</p>
           <p id="rate">평점: ${rate}</p>
-        </div>
-      </div>`;
+        </div>`;
   let movie = document.createElement("div");
+  movie.className = "movieCard";
   movie.innerHTML = tempHtml;
   main.appendChild(movie);
 };
@@ -44,6 +43,7 @@ const search = function () {
 
   for (let i = 0; i < div.length; i++) {
     let content = div[i].getElementsByTagName("h2")[0];
+    console.log(div[i]);
     let txtValue = content.textContent || content.innerText;
     if (txtValue.toUpperCase().indexOf(filter) > -1) {
       div[i].style.display = "block";
@@ -61,21 +61,26 @@ const modalFunc = function (target) {
   const rate = target.querySelector("#rate").textContent;
   const content = target.querySelector("#overview").textContent;
   const releaseDate = target.querySelector("#date").textContent;
-  let tempModal = `<div id="modalDiv">
-    <div class="btn">
-      <button class="modalBtn">닫기</button>
-    </div>
-    <div class="modalImg">
-      <img src="${img}" alt="${title}">
-    </div>
-    <div class="content">
-      <h2>${title}</h2>
-      <p>${content}</p>
-      <p>개봉일: ${releaseDate}</p>
-      <p>${rate}</p>
+  let tempModal = `
+  <div class="container">
+    <div id="modalDiv">
+      <div class="btn">
+        <button class="modalBtn">❌</button>
+      </div>
+      <div class="modalImg">
+        <img src="${img}" alt="${title}">
+      </div>
+      <div class="content">
+        <h2>${title}</h2>
+        <p>${content}</p>
+        <p>개봉일: ${releaseDate}</p>
+        <p>${rate}</p>
+      </div>
+      <div>
+        <button class="bookmarkBtn">북마크 추가</button>
+      </div>
     </div>
   </div>`;
-  // console.log(target);
   modalPage.innerHTML = tempModal;
   modalPage.style.display = "block";
 
