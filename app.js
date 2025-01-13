@@ -1,21 +1,24 @@
-import { fetchMovies } from "./api.js";
+import { getMoviesAPI } from "./api.js";
 
+const body = document.querySelector("body");
 const main = document.querySelector(".movies");
 const searchInput = document.querySelector("#movieTitle");
 
+const movieURL =
+  "https://api.themoviedb.org/3/movie/popular?language=ko-KR&page=1";
+
 // 영화 카드 생성 함수
 const makeCard = function (elem) {
-  // console.log(elem);
   let img =
     "https://media.themoviedb.org/t/p/w440_and_h660_face" + elem["poster_path"];
   let title = elem["title"];
   let rate = elem["vote_average"];
   let engTitle = elem["original_title"];
-  let id = elem["id"];
   let overview = elem["overview"];
   let date = elem["release_date"];
+  let id = elem["id"];
   let tempHtml = `
-        <div>
+        <div id = ${id}>
           <img
             class="poster"
             id="image"
@@ -36,20 +39,32 @@ const makeCard = function (elem) {
 };
 
 // 검색 기능 함수
-const search = function () {
+const search = async function () {
+  const searchURL = `https://api.themoviedb.org/3/search/movie?query=${searchInput.value}&include_adult=false&language=ko-KR&page=1`;
+  const searchMovies = await getMoviesAPI(searchURL);
+
+  searchMovies["results"].forEach((elem) => {
+    if (!document.getElementById(elem.id)) makeCard(elem);
+  });
+
   const movieTitle = document.querySelector("#movieTitle");
   const filter = movieTitle.value.toUpperCase();
   const div = document.getElementsByClassName("movieCard");
 
   for (let i = 0; i < div.length; i++) {
     let content = div[i].getElementsByTagName("h2")[0];
-    console.log(div[i]);
     let txtValue = content.textContent || content.innerText;
+    txtValue = txtValue.replaceAll(" ", "");
     if (txtValue.toUpperCase().indexOf(filter) > -1) {
       div[i].style.display = "block";
     } else {
       div[i].style.display = "none";
     }
+  }
+
+  if (movieTitle.value === "") {
+    main.innerHTML = "";
+    fetchMovies["results"].forEach((elem) => makeCard(elem));
   }
 };
 
@@ -83,18 +98,31 @@ const modalFunc = function (target) {
   </div>`;
   modalPage.innerHTML = tempModal;
   modalPage.style.display = "block";
+  body.classList.toggle("active");
 
   const modalBtn = document.querySelector(".modalBtn");
   modalBtn.addEventListener("click", (event) => {
     modalPage.style.display = "none";
+    body.classList.remove("active");
   });
+
+  // body.addEventListener(
+  //   "click",
+  //   (event) => {
+  //     console.log(event.target);
+  //     if (event.target.className == "modal") return;
+  //     modalPage.style.display = "none";
+  //     body.classList.remove("active");
+  //   },
+  //   { once: true }
+  // );
 };
 
+const fetchMovies = await getMoviesAPI(movieURL);
 fetchMovies["results"].forEach((elem) => makeCard(elem));
 searchInput.addEventListener("keyup", search);
-main.onclick = function (event) {
+body.onclick = function (event) {
   let target = event.target;
-  console.log(target);
-  if (target.tagName != "DIV") return;
+  if (target.className != "movieCard") return;
   modalFunc(target);
 };

@@ -7,13 +7,10 @@ const options = {
   },
 };
 
-// TMDB 인기 영화 API 요청 코드
-async function getMoviesAPI() {
+// TMDB API 요청 코드
+async function getMoviesAPI(URL) {
   try {
-    const response = await fetch(
-      "https://api.themoviedb.org/3/movie/popular?language=ko-KR&page=1",
-      options
-    );
+    const response = await fetch(URL, options);
 
     if (!response.ok) {
       throw new Error("에러 발생!!");
@@ -25,6 +22,4 @@ async function getMoviesAPI() {
   }
 }
 
-const fetchMovies = await getMoviesAPI();
-
-export { fetchMovies };
+export { getMoviesAPI };
