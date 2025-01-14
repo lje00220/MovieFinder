@@ -68,17 +68,26 @@ const search = async function () {
   }
 };
 
+let isModalOpen = false;
+
+const modalPage = document.querySelector(".modal");
+
 // 모달창 클릭, 닫기
 const modalFunc = function (target) {
-  const modalPage = document.querySelector(".modal");
+  const id = target.firstElementChild.id;
   const img = target.querySelector("#image").src;
   const title = target.querySelector("#title").textContent;
   const rate = target.querySelector("#rate").textContent;
   const content = target.querySelector("#overview").textContent;
   const releaseDate = target.querySelector("#date").textContent;
+  const bookMark = target.firstElementChild.id;
+  // console.log(bookMark);
+
+  const btnText = isBookMarked(bookMark) ? "북마크 제거" : "북마크 추가";
+
   let tempModal = `
   <div class="container">
-    <div id="modalDiv">
+    <div class="modalDiv" id="${id}">
       <div class="btn">
         <button class="modalBtn">❌</button>
       </div>
@@ -92,30 +101,54 @@ const modalFunc = function (target) {
         <p>${rate}</p>
       </div>
       <div>
-        <button class="bookmarkBtn">북마크 추가</button>
+        <button class="bookmarkBtn">${btnText}</button>
       </div>
     </div>
   </div>`;
   modalPage.innerHTML = tempModal;
   modalPage.style.display = "block";
   body.classList.toggle("active");
+  isModalOpen = true;
 
   const modalBtn = document.querySelector(".modalBtn");
   modalBtn.addEventListener("click", (event) => {
     modalPage.style.display = "none";
     body.classList.remove("active");
+    isModalOpen = false;
   });
+};
 
-  // body.addEventListener(
-  //   "click",
-  //   (event) => {
-  //     console.log(event.target);
-  //     if (event.target.className == "modal") return;
-  //     modalPage.style.display = "none";
-  //     body.classList.remove("active");
-  //   },
-  //   { once: true }
-  // );
+const isBookMarked = function (movie) {
+  const bookmarkArr = [];
+  if (localStorage.length > 0) {
+    for (let i = 0; i < localStorage.length; i++) {
+      if (localStorage.key(i) === "alertShown") continue;
+      bookmarkArr.push(localStorage.key(i));
+    }
+    return bookmarkArr.includes(movie);
+  } else {
+    return false;
+  }
+};
+
+const addBookMark = function (target) {
+  const bookmarkCard = document.querySelector(".modal");
+  const bookmarkId = bookmarkCard.firstElementChild.firstElementChild.id;
+
+  if (isBookMarked(bookmarkId)) {
+    alert("북마크에 이미 추가되어 있습니다!");
+  } else {
+    localStorage.setItem(bookmarkId, bookmarkId);
+    alert("북마크에 추가되었습니다.");
+  }
+};
+
+const removeBookMark = function (target) {
+  const bookmarkCard = document.querySelector(".modal");
+  const bookmarkId = bookmarkCard.firstElementChild.firstElementChild.id;
+
+  localStorage.removeItem(bookmarkId);
+  alert("북마크에서 제거했습니다.");
 };
 
 const fetchMovies = await getMoviesAPI(movieURL);
@@ -123,6 +156,29 @@ fetchMovies["results"].forEach((elem) => makeCard(elem));
 searchInput.addEventListener("keyup", search);
 body.onclick = function (event) {
   let target = event.target;
+  if (target.className == "bookmarkBtn") {
+    if (target.textContent === "북마크 추가") {
+      addBookMark(target);
+    } else {
+      removeBookMark(target);
+    }
+  }
+
   if (target.className != "movieCard") return;
   modalFunc(target);
 };
+
+// 모달창 영역 외에도 누르면 닫기 기능
+document.addEventListener("mouseup", (e) => {
+  if (!modalPage.contains(e.target) && isModalOpen) {
+    modalPage.style.display = "none";
+    body.classList.remove("active");
+    isModalOpen = false;
+  }
+});
+
+const resetBtn = document.querySelector("h1");
+
+resetBtn.addEventListener("click", () => location.reload());
+
+export { makeCard };

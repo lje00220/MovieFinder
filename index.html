@@ -16,13 +16,16 @@
         autofocus
       />
       <br />
-      <button>북마크 보기</button>
+      <button class="openBookmarkBtn">북마크 보기</button>
     </header>
     <main id="main">
       <div class="movies"></div>
-      <div class="modal" id="popup"></div>
+      <div class="modal">
+        <button class="bookmarkBtn" display="none"></button>
+      </div>
     </main>
     <footer></footer>
     <script type="module" src="app.js"></script>
+    <script type="module" src="bookmark.js"></script>
   </body>
 </html>
