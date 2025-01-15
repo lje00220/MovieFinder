@@ -65,6 +65,7 @@ main {
 button {
   background-color: transparent;
   color: #fff;
+  border: none;
 }
 
 .movies {
@@ -72,11 +73,12 @@ button {
   z-index: 1;
   display: grid;
   margin-top: 30px;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  justify-content: space-between;
-  grid-gap: 30px 10px;
+  grid-template-columns: repeat(auto-fit, minmax(280px, auto));
+  grid-gap: 30px 30px;
   padding: 0 100px;
   place-items: center;
+  justify-content: center;
+  align-content: center;
 }
 
 .movies > div {
@@ -106,7 +108,7 @@ button {
   left: 50%;
   transform: translate(-50%, 0);
   position: fixed;
-  width: 700px;
+  width: 800px;
   height: 80%;
   margin: 0 auto;
   z-index: 2000;
@@ -125,20 +127,67 @@ button {
   border-radius: 10px;
 }
 
-.modal button {
+.modal .btn {
   float: right;
-  margin: 10px 10px 10px 0;
+  margin: 10px 10px 10px 100px;
   right: 0px;
-  border: none;
 }
 
 .modal .content {
   margin: 40px 20px;
 }
 
-.bookmarkBtn {
+.modalDiv {
+  width: 800px;
+}
+
+.bookmarkDiv {
+  display: flex;
   color: #fff;
   background-color: #3c3c3c;
-  width: 150px;
-  height: 30px;
+  width: 700px;
+  height: 40px;
+  justify-content: center;
+  align-content: center;
+  flex-wrap: wrap;
+  margin: 0 auto 20px;
+  border-radius: 10px;
+}
+
+.bookmarkDiv button {
+  font-size: 20px;
+}
+
+.content h2 {
+  font-size: 30px;
+}
+
+.content p {
+  font-size: 20px;
+}
+
+.bookmarkModal {
+  background-color: red;
+  width: 600px;
+  height: 100px;
+  border-radius: 10px;
+  position: fixed;
+  z-index: 3000;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, 0);
+}
+
+.bookmarkModal p {
+  color: black;
+  position: relative;
+  left: 40px;
+  top: 15px;
+}
+
+.bookmarkModal button {
+  float: right;
+  width: 100px;
+  height: 50px;
+  background-color: green;
 }
