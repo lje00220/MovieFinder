@@ -50,12 +50,30 @@ header h1 {
 
 header input[type="text"] {
   width: 1000px;
-  height: 30px;
+  height: 40px;
+  transition: transform 0.2s cubic-bezier(0.25, 0.8, 0.25, 1),
+    background-color 0.2s ease;
+  border-radius: 20px;
+  padding: 0 20px;
+  font-size: 17px;
 }
 
 input:focus {
   outline: none;
   box-shadow: none;
+  transform: scale(1.02);
+}
+
+header .openBookmarkBtn {
+  font-size: 15px;
+  width: 100px;
+  height: 30px;
+  border: 1px solid #dddddd;
+  border-radius: 10px;
+}
+
+header .openBookmarkBtn:hover {
+  transform: scale(1.03);
 }
 
 main {
@@ -87,6 +105,14 @@ button {
   background-color: #fff;
   border-radius: 10px;
   box-shadow: 0px 5px 5px #aaa;
+  transition: transform 0.2s cubic-bezier(0.25, 0.8, 0.25, 1),
+    background-color 0.2s ease;
+}
+
+.movies > div:hover {
+  transform: scale(1.05);
+  box-shadow: 0px 10px 15px rgba(0, 0, 0, 0.2);
+  background-color: #f9f9f9;
 }
 
 .movieCard .poster {
@@ -119,10 +145,13 @@ button {
   overflow: scroll;
 }
 
+.modal::-webkit-scrollbar {
+  display: none;
+}
+
 .modal img {
   display: block;
   margin: 0 auto;
-  background-color: red;
   width: 95%;
   border-radius: 10px;
 }
@@ -152,10 +181,17 @@ button {
   flex-wrap: wrap;
   margin: 0 auto 20px;
   border-radius: 10px;
+  transition: transform 0.2s cubic-bezier(0.25, 0.8, 0.25, 1),
+    background-color 0.2s ease;
+}
+
+.bookmarkDiv:hover {
+  background-color: #2c2c2c;
+  box-shadow: 0px 3px 3px #aaa;
 }
 
 .bookmarkDiv button {
-  font-size: 20px;
+  font-size: 15px;
 }
 
 .content h2 {
@@ -164,30 +200,4 @@ button {
 
 .content p {
   font-size: 20px;
-}
-
-.bookmarkModal {
-  background-color: red;
-  width: 600px;
-  height: 100px;
-  border-radius: 10px;
-  position: fixed;
-  z-index: 3000;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, 0);
-}
-
-.bookmarkModal p {
-  color: black;
-  position: relative;
-  left: 40px;
-  top: 15px;
-}
-
-.bookmarkModal button {
-  float: right;
-  width: 100px;
-  height: 50px;
-  background-color: green;
 }

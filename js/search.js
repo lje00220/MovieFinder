@@ -1,7 +1,7 @@
 import { getMoviesAPI } from "./api.js";
 import { makeCard, fetchMovies } from "./app.js";
 
-const searchInput = document.querySelector("#movieTitle"); // input창 검색어
+const searchInput = document.querySelector("#searchMovietitle"); // input창 검색어
 const movies = document.querySelector(".movies"); // 영화 카드들 container
 
 // 영화 검색 함수
