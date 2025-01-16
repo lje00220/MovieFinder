@@ -6,8 +6,9 @@ const movies = document.querySelector(".movies"); // 영화 카드들 container
 
 // 영화 검색 함수
 const search = async function () {
-  const searchValue = searchInput.value.toUpperCase().replaceAll(" ", ""); // 검색어
-  const searchURL = `https://api.themoviedb.org/3/search/movie?query=${searchValue}&include_adult=false&language=ko-KR&page=1`;
+  const searchValue = searchInput.value; // 검색어
+  console.log(searchValue);
+  const searchURL = `https://api.themoviedb.org/3/search/movie?query=${searchValue}&include_adult=true&language=ko-KR&page=1`;
   const searchMovies = await getMoviesAPI(searchURL);
 
   movies.innerHTML = "";

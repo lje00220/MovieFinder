@@ -41,13 +41,13 @@ const resetBtn = document.querySelector("h1");
 const bookmarkBtn = document.querySelector(".openBookmarkBtn");
 const movieURL =
   "https://api.themoviedb.org/3/movie/popular?language=ko-KR&page=1";
-let timer;
 
 // 초반 영화 20개 카드 리스트 생성
 const fetchMovies = await getMoviesAPI(movieURL);
 fetchMovies["results"].forEach((elem) => makeCard(elem));
 
 // 영화 검색(디바운싱 적용)
+let timer;
 searchInput.addEventListener("input", () => {
   if (timer) clearTimeout(timer);
   timer = setTimeout(search, 500);

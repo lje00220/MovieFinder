@@ -49,7 +49,7 @@ header h1 {
 }
 
 header input[type="text"] {
-  width: 1000px;
+  width: 55%;
   height: 40px;
   transition: transform 0.2s cubic-bezier(0.25, 0.8, 0.25, 1),
     background-color 0.2s ease;
@@ -160,6 +160,10 @@ button {
   float: right;
   margin: 10px 10px 10px 100px;
   right: 0px;
+}
+
+.modal .btn:hover {
+  filter: invert(50%);
 }
 
 .modal .content {
