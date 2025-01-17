@@ -15,6 +15,7 @@
 body {
   background-color: #dddddd;
   margin: 0;
+  zoom: 0.75;
 }
 
 body::after {
@@ -143,6 +144,7 @@ button {
   border-radius: 10px;
   box-shadow: 0px 5px 5px #aaa;
   overflow: scroll;
+  zoom: 0.75;
 }
 
 .modal::-webkit-scrollbar {
